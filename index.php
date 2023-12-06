@@ -49,7 +49,7 @@ include "db_conn.php";
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `crud`";
+        $sql = "SELECT * FROM `StudentInfo`";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
         ?>

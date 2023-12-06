@@ -7,7 +7,7 @@ if (isset($_POST["submit"])) {
    $email = $_POST['email'];
    $gender = $_POST['gender'];
 
-   $sql = "INSERT INTO `crud`(`id`, `first_name`, `last_name`, `email`, `gender`) VALUES (NULL,'$first_name','$last_name','$email','$gender')";
+   $sql = "INSERT INTO `StudentInfo`(`id`, `first_name`, `last_name`, `email`, `gender`) VALUES (NULL,'$first_name','$last_name','$email','$gender')";
 
    $result = mysqli_query($conn, $sql);
 

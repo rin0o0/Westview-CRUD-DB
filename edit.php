@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
   $email = $_POST['email'];
   $gender = $_POST['gender'];
 
-  $sql = "UPDATE `crud` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`gender`='$gender' WHERE id = $id";
+  $sql = "UPDATE `StudentInfo` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`gender`='$gender' WHERE id = $id";
 
   $result = mysqli_query($conn, $sql);
 
@@ -53,7 +53,7 @@ if (isset($_POST["submit"])) {
     </div>
 
     <?php
-    $sql = "SELECT * FROM `crud` WHERE id = $id LIMIT 1";
+    $sql = "SELECT * FROM `StudentInfo` WHERE id = $id LIMIT 1";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     ?>
