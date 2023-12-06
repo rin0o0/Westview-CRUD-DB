@@ -55,54 +55,142 @@ if (isset($_POST["submit"])) {
             <img src="Header1.png" class="img-fluid page-header" width="800px" alt="Responsive image" >
   </header>
 
-  <div class="container">
-    <div class="text-center mb-4">
-      <h3>Edit User Information</h3>
-      <p class="text-muted">Click update after changing any information</p>
-    </div>
+  <div class="container form-container py-5 px-5">
+      <div class="text-center mb-4">
+          <h3>EDIT STUDENT INFORMATION</h3>
+          <p>Click update after changing any information</p>
+      </div>
 
-    <?php
-    $sql = "SELECT * FROM `StudentInfo` WHERE id = $id LIMIT 1";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+      <?php
+      $sql = "SELECT * FROM `StudentInfo` WHERE id = $id LIMIT 1";
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($result);
+      ?>
 
-    <div class="container d-flex justify-content-center">
-      <form action="" method="post" style="width:50vw; min-width:300px;">
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label">First Name:</label>
-            <input type="text" class="form-control" name="first_name" value="<?php echo $row['first_name'] ?>">
-          </div>
+      <!-- MAIN FORM CONTENT -->
+      <div class="container d-flex justify-content-center">
+          <form class="was-validated" method="post" style="width:50vw; min-width:300px;">
 
-          <div class="col">
-            <label class="form-label">Last Name:</label>
-            <input type="text" class="form-control" name="last_name" value="<?php echo $row['last_name'] ?>">
-          </div>
-        </div>
+            <div class="row mb-3">
 
-        <div class="mb-3">
-          <label class="form-label">Email:</label>
-          <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
-        </div>
+                <!-- First Name -->
+                <div class="mb-3 col-md-4">
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="Enter your First Name" id="first_name"  name="first_name" value="<?php echo $row['first_name'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
 
-        <div class="form-group mb-3">
-          <label>Gender:</label>
-          &nbsp;
-          <input type="radio" class="form-check-input" name="gender" id="male" value="male" <?php echo ($row["gender"] == 'male') ? "checked" : ""; ?>>
-          <label for="male" class="form-input-label">Male</label>
-          &nbsp;
-          <input type="radio" class="form-check-input" name="gender" id="female" value="female" <?php echo ($row["gender"] == 'female') ? "checked" : ""; ?>>
-          <label for="female" class="form-input-label">Female</label>
-        </div>
+                <!-- Middle Name -->
+                <div class="mb-3 col-md-4">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" placeholder="Enter your Middle Name" id="middle_name" name="middle_name" value="<?php echo $row['middle_name'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
 
-        <div>
-          <button type="submit" class="btn btn-success" name="submit">Update</button>
-          <a href="index.php" class="btn btn-danger">Cancel</a>
-        </div>
-      </form>
-    </div>
-  </div>
+                <!-- last Name -->
+                <div class="mb-3 col-md-4">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your Last Name" id="last_name" name="last_name" value="<?php echo $row['last_name'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group mb-3 col-md-4">
+                  <label>Gender:</label>
+                  &nbsp;
+                  <div class="pt-2">
+                      <input type="radio" class="form-check-input" name="gender" id="male" value="male" <?php echo ($row["gender"] == 'male') ? "checked" : ""; ?>>
+                      <label for="male" class="form-input-label">Male</label>
+                      &nbsp;
+                      <input type="radio" class="form-check-input" name="gender" id="female" value="female" <?php echo ($row["gender"] == 'female') ? "checked" : ""; ?>>
+                      <label for="female" class="form-input-label">Female</label>
+                  </div>
+                </div>
+
+                <!-- LRN -->
+                <div class="mb-3 col-md-4">
+                  <label>LRN</label>
+                  <input type="tel" class="form-control" pattern=".{12}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" value="<?php echo $row['lrn'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="mb-3 col-md-4">
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" placeholder="Enter Date of Birth" id="dateOf_birth" name="dateOf_birth" value="<?php echo $row['dateOf_birth'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Place of Birth -->
+                <div class="mb-3 col-md-6">
+                  <label>Place of Birth</label>
+                  <input type="text" class="form-control" placeholder="Enter Place of Birth" id="placeOf_birth" name="placeOf_birth" value="<?php echo $row['placeOf_birth'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Civil Status -->
+                <div class="mb-3 col-md-6">
+                  <label>Civil Status</label>
+                  <input type="text" class="form-control" placeholder="Enter Civil Status Name" id="civil_status" name="civil_status" value="<?php echo $row['civil_status'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                
+                <!-- Email Address -->
+                <div class="mb-3 col-md-6">
+                  <label>Email Address</label>
+                  <input type="email" class="form-control" placeholder="Enter Email Address" id="email" name="email" value="<?php echo $row['email'] ?>"autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Mobile Number -->
+                <div class="mb-3 col-md-6">
+                  <label>Mobile Number</label>
+                  <input type="tel" class="form-control" pattern=".{11} " placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" value="<?php echo $row['mobile_no'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Nationality -->
+                <div class="mb-3 col-md-4">
+                  <label>Nationality</label>
+                  <input type="text" class="form-control" placeholder="Enter Nationality" id="nationality" name="nationality" value="<?php echo $row['nationality'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Enrolled Program -->
+                <div class="mb-3 col-md-4">
+                  <label>Enrolled Program</label>
+                  <input type="text" class="form-control" placeholder="Enter Civil Status Name" id="program" name="program" value="<?php echo $row['program'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!-- Section -->
+                <div class="mb-3 col-md-4">
+                  <label>Section</label>
+                  <input type="text" class="form-control" placeholder="Enter Section" id="section" name="section" value="<?php echo $row['section'] ?>" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-success" name="submit">Update</button>
+              <a href="index.php" class="btn btn-danger">Cancel</a>
+            </div>
+            </div>
+          </form>
+      </div>
+
 
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
