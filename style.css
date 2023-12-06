@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(4,35,60);
+    font-family: 'Montserrat', sans-serif; 
+    padding-bottom: 3rem;
+    margin-left:3rem;
+    margin-right:4rem;
+    
+}
+
+
+.tbl-container{
+    background-color: rgb(188,149,86);
+    border-radius: 1rem;
+}
+
+
+.divider {
+    height: 4px;
+    background-color: rgba(51, 50, 50, 0.7); /*any color with lower opacity*/
+}
+
+.form-container{
+    background-color: rgb(188,149,86);
+    border-radius: 1rem;
+    color: white;
+}
+
+.selectpicker > option[selected] {
+    display: none;
+}
