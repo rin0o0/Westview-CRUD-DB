@@ -35,10 +35,9 @@ if (isset($_POST["submit"])) {
          $result2 = mysqli_query($conn, $sql2);
          
          if ($result2) {
-            header("Location: index.php?msg= Successfully added student record: " . $student_id);
+            header("Location: index.php?msg= Successfully added student record: Student No." . $student_id);
          } if (!$result2){
             header("Failed to insert address: " . mysqli_error($conn));
-            
          }
          
    } else {
@@ -121,7 +120,7 @@ if (isset($_POST["submit"])) {
                <!-- LRN -->
                <div class="mb-3 col-md-5">
                   <label>LRN</label>
-                  <input type="tel" class="form-control" pattern=".{1}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
+                  <input type="tel" class="form-control" pattern=".{12}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                </div>
 
@@ -132,14 +131,15 @@ if (isset($_POST["submit"])) {
                   <div class="valid-feedback">Valid</div>
                </div>
 
+               <!-- gender -->
                <div class="form-group mb-3 col-md-3">
                   <label>Gender:</label>
                   &nbsp;
                   <div class="pt-2">
-                     <input type="radio" class="form-check-input" name="gender" id="male" value="male">
+                     <input type="radio" class="form-check-input" name="gender" id="male" value="Male">
                      <label for="male" class="form-input-label">Male</label>
                      &nbsp;
-                     <input type="radio" class="form-check-input" name="gender" id="female" value="female">
+                     <input type="radio" class="form-check-input" name="gender" id="female" value="Female">
                      <label for="female" class="form-input-label">Female</label>
                   </div>
                </div>
@@ -175,7 +175,7 @@ if (isset($_POST["submit"])) {
                <!-- Mobile Number -->
                <div class="mb-3 col-md-6">
                   <label>Mobile Number</label>
-                  <input type="tel" class="form-control" pattern=".{1}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" autocomplete="off" required>
+                  <input type="tel" class="form-control" pattern=".{11}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                </div>
 
@@ -273,8 +273,8 @@ if (isset($_POST["submit"])) {
                </div>
 
                <div class="text-center pt-5">
-                  <button type="submit" class="btn btn-lg bg-green text-light" name="submit">SAVE</button>
-                  <a href="index.php" class="btn bg-red btn-lg text-light">CANCEL</a>
+                  <button type="submit" class="btn btn-lg bg-green text-light px-4" name="submit">SAVE</button>
+                  <a href="index.php" class="btn bg-red btn-lg text-light px-4">CANCEL</a>
                </div>
             </div>
          </div>

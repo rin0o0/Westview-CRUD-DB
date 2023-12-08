@@ -1,7 +1,31 @@
 <?php
 include "db_conn.php";
 $id = $_GET["id"];
+
+if (isset($_POST["submit"])) {
+  $house_no = $_POST['house_no'];
+  $street = $_POST['street']; 
+  $sudb = $_POST['sudb'];
+  $barangay = $_POST['barangay'];
+  $city = $_POST['city'];
+  $province = $_POST['province'];
+  $country = $_POST['country'];
+  $zip_code = $_POST['zip_code'];
+
+
+  $sql = "UPDATE `addresstbl` SET `house_no`='$house_no',`street`='$street',`sudb`='$sudb',`barangay`='$barangay',`city`='$city',`province`='$province',`country`='$country',`zip_code`='$zip_code' WHERE student_id = $id";
+
+  $result = mysqli_query($conn, $sql);
+
+  if ($result) {
+    header("Location: index.php?msg=Successfully updated address for Student No. " . $id);
+  } else {
+    echo "Failed: " . mysqli_error($conn);
+  }
+}
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -36,18 +60,9 @@ $id = $_GET["id"];
   </header>
 
   <div class="container form-container pt-5 px-5">
-    <?php
-      if (isset($_GET["msg"])) {
-        $msg = $_GET["msg"];
-        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-        ' . $msg . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>';
-      }
-    ?>
       <div class="text-center mb-4">
-          <h3>STUDENT ADDRESS</h3>
-          <p>Click update to change any information</p>
+          <h3>EDIT STUDENT ADDRESS</h3>
+          <p>Click save to make changes</p>
       </div>
 
       <?php
@@ -56,10 +71,9 @@ $id = $_GET["id"];
       $row = mysqli_fetch_assoc($result);
       ?>
 
-
       <!-- MAIN FORM CONTENT -->
       <div class="container d-flex justify-content-center">
-          <form method="post" style="width:50vw; min-width:300px;">
+          <form class="was-validated" method="post" style="width:50vw; min-width:300px;">
 
             <div class="row mb-3">
 
@@ -67,21 +81,21 @@ $id = $_GET["id"];
                 <!-- House No. -->
                 <div class="mb-3 col-md-4">
                     <label>House/Block No.</label>
-                    <input type="text" class="form-control" placeholder="Enter House No" id="house_no" name="house_no" value="<?php echo $row['house_no'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter House No" id="house_no" name="house_no" value="<?php echo $row['house_no'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
 
                 <!-- Street -->
                 <div class="mb-3 col-md-4">
                     <label>Street</label>
-                    <input type="text" class="form-control" placeholder="Enter Street" id="street" name="street" value="<?php echo $row['street'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Street" id="street" name="street" value="<?php echo $row['street'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
                 
                 <!-- Subdivision -->
                 <div class="mb-3 col-md-4">
                     <label>Subdivision</label>
-                    <input type="text" class="form-control" placeholder="Enter Subdivision" id="sudb" name="sudb" value="<?php echo $row['sudb'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Subdivision" id="sudb" name="sudb" value="<?php echo $row['sudb'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
               
@@ -89,7 +103,7 @@ $id = $_GET["id"];
                 <!-- Barangay -->
                 <div class="mb-3 col-md-6">
                     <label>Barangay</label>
-                    <input type="text" class="form-control" placeholder="Enter Barangay" id="barangay" name="barangay"value="<?php echo $row['barangay'] ?>"  autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Barangay" id="barangay" name="barangay"value="<?php echo $row['barangay'] ?>"  autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
                 
@@ -97,35 +111,35 @@ $id = $_GET["id"];
                 <!-- City -->
                 <div class="mb-3 col-md-6">
                     <label>City</label>
-                    <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" value="<?php echo $row['city'] ?>" autocomplete="off" disabled>
-                    <div class="valid-feedback">Valid</div>
+                    <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" value="<?php echo $row['city'] ?>" autocomplete="off">
+                    
                 </div>
 
                 <!-- Province/Region -->
                 <div class="mb-3 col-md-4">
                     <label>Province/Region</label>
-                    <input type="text" class="form-control" placeholder="Enter Province" id="province" name="province" value="<?php echo $row['province'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Province" id="province" name="province" value="<?php echo $row['province'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>          
 
                 <!-- Country -->
                 <div class="mb-3 col-md-4">
                     <label>Country</label>
-                    <input type="text" class="form-control" placeholder="Enter Country" id="country" name="country" value="<?php echo $row['country'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Country" id="country" name="country" value="<?php echo $row['country'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
 
                 <!-- Zip Code -->
                 <div class="mb-3 col-md-4">
                     <label>Zip Code</label>
-                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off" disabled>
+                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
             </div>
 
             <div class="text-center pt-4 pb-2">
-              <a href="edit-address.php?id=<?php echo $row["student_id"] ?>" class="btn btn-lg bg-green text-light px-4" name="updateAdd">Update</a>
-              <a href= "index.php" class="btn btn-lg text-light px-4" style="background-color: rgb(4,35,60);">Go Back</a>
+              <button type="submit" class="btn btn-lg bg-green text-light" name="submit">Save</button>
+              <a href="address.php?id=<?php echo $row["student_id"]?>" class="btn btn-lg text-light" style="background-color: rgb(4,35,60);">Go Back</a>
             </div>
             </div>
           </form>

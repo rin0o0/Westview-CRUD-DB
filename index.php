@@ -112,7 +112,7 @@ include "db_conn.php";
             <td>
               <a href="edit.php?id=<?php echo $row["id"] ?>"  style="color: rgb(4,35,60);"><i class="fa-solid fa-pencil fs-5 me-3"></i></a>
               <a data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a>
-              <a href="address.php" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
+              <a href="address.php?id=<?php echo $row["id"] ?>"" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
             </td>
           </tr>
 

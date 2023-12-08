@@ -4,16 +4,25 @@ $id = $_GET["id"];
 
 if (isset($_POST["submit"])) {
   $first_name = $_POST['first_name'];
+  $middle_name = $_POST['middle_name'];
   $last_name = $_POST['last_name'];
+  $lrn = $_POST['lrn'];
   $email = $_POST['email'];
   $gender = $_POST['gender'];
+  $mobile_no = $_POST['mobile_no'];
+  $placeOf_birth = $_POST['placeOf_birth'];
+  $dateOf_birth = $_POST['dateOf_birth'];
+  $civil_status = $_POST['civil_status'];
+  $nationality = $_POST['nationality'];
+  $program = $_POST['program'];
+  $section = $_POST['section'];
 
-  $sql = "UPDATE `StudentInfo` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`gender`='$gender' WHERE id = $id";
+  $sql = "UPDATE `StudentInfo` SET `first_name`='$first_name',`middle_name`='$middle_name',`last_name`='$last_name',`lrn`='$lrn',`email`='$email',`gender`='$gender',`mobile_no`='$mobile_no',`placeOf_birth`='$placeOf_birth',`dateOf_birth`='$dateOf_birth',`civil_status`='$civil_status',`nationality`='$nationality',`program`='$program',`section`='$section' WHERE id = $id";
 
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
-    header("Location: index.php?msg=Successfully updated data  ");
+    header("Location: index.php?msg=Successfully updated data for Student No." . $id);
   } else {
     echo "Failed: " . mysqli_error($conn);
   }
@@ -102,10 +111,10 @@ if (isset($_POST["submit"])) {
                   <label>Gender:</label>
                   &nbsp;
                   <div class="pt-2">
-                      <input type="radio" class="form-check-input" name="gender" id="male" value="male" <?php echo ($row["gender"] == 'male') ? "checked" : ""; ?>>
+                      <input type="radio" class="form-check-input" name="gender" id="male" value="Male" <?php echo ($row["gender"] == 'Male') ? "checked" : ""; ?>>
                       <label for="male" class="form-input-label">Male</label>
                       &nbsp;
-                      <input type="radio" class="form-check-input" name="gender" id="female" value="female" <?php echo ($row["gender"] == 'female') ? "checked" : ""; ?>>
+                      <input type="radio" class="form-check-input" name="gender" id="female" value="Female" <?php echo ($row["gender"] == 'Female') ? "checked" : ""; ?>>
                       <label for="female" class="form-input-label">Female</label>
                   </div>
                 </div>
@@ -153,7 +162,7 @@ if (isset($_POST["submit"])) {
                 <!-- Mobile Number -->
                 <div class="mb-3 col-md-6">
                   <label>Mobile Number</label>
-                  <input type="tel" class="form-control" pattern=".{11} " placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" value="<?php echo $row['mobile_no'] ?>" autocomplete="off" required>
+                  <input type="tel" class="form-control" pattern=".{11}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" value="<?php echo $row['mobile_no'] ?>" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
@@ -181,73 +190,11 @@ if (isset($_POST["submit"])) {
                   <div class="valid-feedback">Valid</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
-
-                <div class="pt-3"></div>
-                <div class="divider"></div>
-                <div class="pt-4"></div>
-                  <!-- House No. -->
-                <div class="mb-3 col-md-4">
-                    <label>House/Block No.</label>
-                    <input type="text" class="form-control" placeholder="Enter House No" id="house_no" name="house_no" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-
-                <!-- Street -->
-                <div class="mb-3 col-md-4">
-                    <label>Street</label>
-                    <input type="text" class="form-control" placeholder="Enter Street" id="street" name="street" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-                
-
-                <!-- Subdivision -->
-                <div class="mb-3 col-md-4">
-                    <label>Subdivision</label>
-                    <input type="text" class="form-control" placeholder="Enter Subdivision" id="sudb" name="sudb" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-              
-
-                <!-- Barangay -->
-                <div class="mb-3 col-md-6">
-                    <label>Barangay</label>
-                    <input type="text" class="form-control" placeholder="Enter Barangay" id="barangay" name="barangay" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-                
-
-                <!-- City -->
-                <div class="mb-3 col-md-6">
-                    <label>City</label>
-                    <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-
-                <!-- Province/Region -->
-                <div class="mb-3 col-md-4">
-                    <label>Province/Region</label>
-                    <input type="text" class="form-control" placeholder="Enter Province" id="province" name="province" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>          
-
-                <!-- Country -->
-                <div class="mb-3 col-md-4">
-                    <label>Country</label>
-                    <input type="text" class="form-control" placeholder="Enter Country" id="country" name="country" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
-
-                <!-- Zip Code -->
-                <div class="mb-3 col-md-4">
-                    <label>Zip Code</label>
-                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" autocomplete="off" required>
-                    <div class="valid-feedback">Valid</div>
-                </div>
             </div>
 
             <div class="text-center pt-4 pb-2">
-              <button type="submit" class="btn btn-lg bg-green text-light" name="submit">Update</button>
-              <a href="index.php" class="btn bg-red btn-lg text-light">Cancel</a>
+              <button type="submit" class="btn btn-lg bg-green text-light px-4" name="submit">Update</button>
+              <a href="index.php" class="btn bg-red btn-lg text-light px-4">Cancel</a>
             </div>
             </div>
           </form>
