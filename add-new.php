@@ -17,11 +17,11 @@ if (isset($_POST["submit"])) {
    $section = $_POST['section'];
 
    $sql = "INSERT INTO `StudentInfo`(`id`, `first_name`, `middle_name`,`last_name`, `lrn`, `email`, `gender`,`mobile_no`,`placeOf_birth`,`dateOf_birth`,`civil_status`,`nationality`,`program`,`section` ) VALUES (NULL,'$first_name','$middle_name','$last_name','$lrn','$email','$gender','$mobile_no ','$placeOf_birth ','$dateOf_birth ','$civil_status ','$nationality','$program','$section')";
-
+   
    $result = mysqli_query($conn, $sql);
 
    if ($result) {
-      header("Location: index.php?msg=New record created successfully");
+      header("Location: index.php?msg=Successfully created new student record");
    } else {
       echo "Failed: " . mysqli_error($conn);
    }
@@ -45,7 +45,7 @@ if (isset($_POST["submit"])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
    <!-- CSS -->
-   <link rel="stylesheet" href="style.css">
+   <link href='style.css?version=1' rel='stylesheet'></link>
    
    <!-- Montserrat Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,12 +62,17 @@ if (isset($_POST["submit"])) {
    </header>
 
    <!-- MAIN CONTENT -->
-   <div class="container form-container py-5 px-5">
+   <div class="container form-container pt-5">
       <div class="text-center mb-4">
-         <h3>ADD NEW STUDENT</h3>
+         <h2 class ="fw-bold">ADD NEW STUDENT</h2>
          <p>Complete the form below to add a new student</p>
       </div>
-      <div class="container d-flex justify-content-center">
+      <!-- STUDENT INFORMATION SECTION -->
+      <div class="divider mb-2"></div>
+      <h3 class="text-center py-3">Student Information</h3>
+
+      <div class="container d-flex justify-content-center pt-2">
+         
          <form class="was-validated" method="post" style="width:50vw; min-width:300px;">
 
             <div class="row mb-3">
@@ -77,7 +82,6 @@ if (isset($_POST["submit"])) {
                <label>First Name</label>
                <input type="text" class="form-control" placeholder="Enter your First Name" id="first_name" name="first_name" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- Middle Name -->
@@ -85,7 +89,6 @@ if (isset($_POST["submit"])) {
                <label>Middle Name</label>
                <input type="text" class="form-control" placeholder="Enter your Middle Name" id="middle_name" name="middle_name" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- last Name -->
@@ -93,10 +96,22 @@ if (isset($_POST["submit"])) {
                <label>Last Name</label>
                <input type="text" class="form-control" placeholder="Enter your Last Name" id="last_name" name="last_name" autocomplete="off" required>
                <div class="valid-feedback">Valid</div>
-               <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
-               <div class="form-group mb-3 col-md-4">
+               <div class="mb-3 col-md-5">
+                  <label>LRN</label>
+                  <input type="tel" class="form-control" pattern=".{12}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <!-- Date of Birth -->
+               <div class="mb-3 col-md-4">
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" placeholder="Enter Date of Birth" id="dateOf_birth" name="dateOf_birth" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <div class="form-group mb-3 col-md-3">
                   <label>Gender:</label>
                   &nbsp;
                   <div class="pt-2">
@@ -108,27 +123,11 @@ if (isset($_POST["submit"])) {
                   </div>
                </div>
 
-               <div class="mb-3 col-md-4">
-                  <label>LRN</label>
-                  <input type="tel" class="form-control" pattern=".{12}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
-                  <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-               </div>
-
-               <!-- Date of Birth -->
-               <div class="mb-3 col-md-4">
-                  <label>Date of Birth</label>
-                  <input type="date" class="form-control" placeholder="Enter Date of Birth" id="dateOf_birth" name="dateOf_birth" autocomplete="off" required>
-                  <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-               </div>
-
                <!-- Place of Birth -->
                <div class="mb-3 col-md-6">
                   <label>Place of Birth</label>
                   <input type="text" class="form-control" placeholder="Enter Place of Birth" id="placeOf_birth" name="placeOf_birth" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- Civil Status -->
@@ -150,7 +149,6 @@ if (isset($_POST["submit"])) {
                   <label>Email Address</label>
                   <input type="email" class="form-control" placeholder="Enter Email Address" id="email" name="email" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- Mobile Number -->
@@ -158,7 +156,6 @@ if (isset($_POST["submit"])) {
                   <label>Mobile Number</label>
                   <input type="tel" class="form-control" pattern=".{11}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- Nationality -->
@@ -166,7 +163,6 @@ if (isset($_POST["submit"])) {
                   <label>Nationality</label>
                   <input type="text" class="form-control" placeholder="Enter Nationality" id="nationality" name="nationality" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
                </div>
 
                <!-- Enrolled Program -->
@@ -189,18 +185,80 @@ if (isset($_POST["submit"])) {
                   <label>Section</label>
                   <input type="text" class="form-control" placeholder="Enter Section" id="section" name="section" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
+               </div>
+            
+
+               <!-- STUDENT ADDRESS SECTION -->
+               <div class="divider mb-2"></div>
+               <h3 class="text-center py-3">Student Address</h3>
+
+               <!-- House No. -->
+               <div class="mb-3 col-md-4">
+                  <label>House/Block No.</label>
+                  <input type="text" class="form-control" placeholder="Enter House No" id="house_no" name="house_no" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <!-- Street -->
+               <div class="mb-3 col-md-4">
+                  <label>Street</label>
+                  <input type="text" class="form-control" placeholder="Enter Street" id="street" name="street" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+               
+
+               <!-- Subdivision -->
+               <div class="mb-3 col-md-4">
+                  <label>Subdivision</label>
+                  <input type="text" class="form-control" placeholder="Enter Subdivision" id="sudb" name="sudb" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+            
+
+               <!-- Barangay -->
+               <div class="mb-3 col-md-6">
+                  <label>Barangay</label>
+                  <input type="text" class="form-control" placeholder="Enter Barangay" id="barangay" name="barangay" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+               
+
+               <!-- City -->
+               <div class="mb-3 col-md-6">
+                  <label>City</label>
+                  <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <!-- Province/Region -->
+               <div class="mb-3 col-md-4">
+                  <label>Province/Region</label>
+                  <input type="text" class="form-control" placeholder="Enter Province" id="province" name="province" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>          
+
+               <!-- Country -->
+               <div class="mb-3 col-md-4">
+                  <label>Country</label>
+                  <input type="text" class="form-control" placeholder="Enter Country" id="country" name="country" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <!-- Zip Code -->
+               <div class="mb-3 col-md-4">
+                  <label>Zip Code</label>
+                  <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" autocomplete="off" required>
+                  <div class="valid-feedback">Valid</div>
+               </div>
+
+               <div class="text-center pt-5">
+                  <button type="submit" class="btn btn-lg bg-green text-light" name="submit">SAVE</button>
+                  <a href="index.php" class="btn bg-red btn-lg text-light">CANCEL</a>
                </div>
             </div>
-
-            <div>
-               <button type="submit" class="btn btn-success" name="submit">Save</button>
-               <a href="index.php" class="btn btn-danger">Cancel</a>
-            </div>
-
-            </div>
-         </form>
-      </div>
+         </div>
+      </form>
+   </div>
 
    <!-- Bootstrap -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

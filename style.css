@@ -15,16 +15,25 @@ body {
 
 
 .divider {
-    height: 4px;
-    background-color: rgba(51, 50, 50, 0.7); /*any color with lower opacity*/
+    height: 2px;
+    background-color: rgba(83, 83, 83, 0.5); /*any color with lower opacity*/
 }
 
 .form-container{
     background-color: rgb(188,149,86);
     border-radius: 1rem;
     color: white;
+    width: 60%;
 }
 
 .selectpicker > option[selected] {
     display: none;
+}
+
+.bg-red{
+    background-color: #EF2D56;
+}
+
+.bg-green{
+    background-color: #32965D;
 }

@@ -44,12 +44,12 @@ include "db_conn.php";
     </div>';
     }
     ?>
-    <a href="add-new.php" class="btn btn-dark mb-3">Add New Student</a>
+    <a href="add-new.php" class="btn text-light mb-3" style="background-color: rgb(4,35,60);">Add New Student</a>
 
     <table class="table table-hover text-center table-responsive-md table-sm g-5" width="100%">
-      <thead class="table-dark"  width="70%">
+      <thead class="text-light" style="background-color: rgb(4,35,60);" width="70%">
         <tr>
-          <th scope="col" >ID</th> 
+          <th scope="col" >Student ID</th> 
           <th scope="col">First Name</th>
           <th scope="col">Middle Name</th>
           <th scope="col">Last Name</th>
@@ -83,8 +83,9 @@ include "db_conn.php";
             <td>BSIT</td>
             <td>BSIT3A</td>
             <td>
-              <a href="edit.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="delete.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+              <a href="edit.php?id=<?php echo $row["id"] ?>" style="color: rgb(4,35,60);"><i class="fa-solid fa-pencil fs-5 me-3"></i></a>
+              <a data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a>
+              <a href="address.php" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
             </td>
           </tr>
         <?php
@@ -109,21 +110,44 @@ include "db_conn.php";
             <td><?php echo $row["section"] ?></td>
             
             <td>
-              <a href="edit.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="delete.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+              <a href="edit.php?id=<?php echo $row["id"] ?>"  style="color: rgb(4,35,60);"><i class="fa-solid fa-pencil fs-5 me-3"></i></a>
+              <a data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a>
+              <a href="address.php" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
             </td>
           </tr>
+
+        <!------------------------ DELETE MODAL ------------------------>
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="delete-label" aria-hidden="true">
+            <div class="modal-dialog modal-md ">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger" id="modal-header">
+                      <h1 class="modal-title text-light fs-5">Confirm Delete</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                      <div id="delete-prompt">Are you sure you want to delete this record?</div>
+                  </div>
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancel</button>
+                      <a href="delete.php?id=<?php echo $row["id"] ?>" class="btn btn-outline-danger">Delete</a>
+                  </div>
+                </div>
+            </div>
+        </div>
         <?php
         }
         ?>
-        
       </tbody>
     </table>
   </div>
+    
 
   <!-- Bootstrap -->
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
+  <script></script>
 </body>
 
 </html>

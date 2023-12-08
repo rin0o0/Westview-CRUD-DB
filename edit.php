@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
-    header("Location: index.php?msg=Data updated successfully");
+    header("Location: index.php?msg=Successfully updated data  ");
   } else {
     echo "Failed: " . mysqli_error($conn);
   }
@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link href='style.css?version=1' rel='stylesheet'></link>
   
   <!-- Montserrat Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
             <img src="Header1.png" class="img-fluid page-header" width="800px" alt="Responsive image" >
   </header>
 
-  <div class="container form-container py-5 px-5">
+  <div class="container form-container pt-5 px-5">
       <div class="text-center mb-4">
           <h3>EDIT STUDENT INFORMATION</h3>
           <p>Click update after changing any information</p>
@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
 
       <!-- MAIN FORM CONTENT -->
       <div class="container d-flex justify-content-center">
-          <form class="was-validated" method="post" style="width:50vw; min-width:300px;">
+          <form method="post" style="width:50vw; min-width:300px;">
 
             <div class="row mb-3">
 
@@ -181,11 +181,73 @@ if (isset($_POST["submit"])) {
                   <div class="valid-feedback">Valid</div>
                   <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
+
+                <div class="pt-3"></div>
+                <div class="divider"></div>
+                <div class="pt-4"></div>
+                  <!-- House No. -->
+                <div class="mb-3 col-md-4">
+                    <label>House/Block No.</label>
+                    <input type="text" class="form-control" placeholder="Enter House No" id="house_no" name="house_no" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+
+                <!-- Street -->
+                <div class="mb-3 col-md-4">
+                    <label>Street</label>
+                    <input type="text" class="form-control" placeholder="Enter Street" id="street" name="street" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+                
+
+                <!-- Subdivision -->
+                <div class="mb-3 col-md-4">
+                    <label>Subdivision</label>
+                    <input type="text" class="form-control" placeholder="Enter Subdivision" id="sudb" name="sudb" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+              
+
+                <!-- Barangay -->
+                <div class="mb-3 col-md-6">
+                    <label>Barangay</label>
+                    <input type="text" class="form-control" placeholder="Enter Barangay" id="barangay" name="barangay" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+                
+
+                <!-- City -->
+                <div class="mb-3 col-md-6">
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="Enter City" id="city" name="city" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+
+                <!-- Province/Region -->
+                <div class="mb-3 col-md-4">
+                    <label>Province/Region</label>
+                    <input type="text" class="form-control" placeholder="Enter Province" id="province" name="province" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>          
+
+                <!-- Country -->
+                <div class="mb-3 col-md-4">
+                    <label>Country</label>
+                    <input type="text" class="form-control" placeholder="Enter Country" id="country" name="country" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
+
+                <!-- Zip Code -->
+                <div class="mb-3 col-md-4">
+                    <label>Zip Code</label>
+                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" autocomplete="off" required>
+                    <div class="valid-feedback">Valid</div>
+                </div>
             </div>
 
-            <div>
-              <button type="submit" class="btn btn-success" name="submit">Update</button>
-              <a href="index.php" class="btn btn-danger">Cancel</a>
+            <div class="text-center pt-4 pb-2">
+              <button type="submit" class="btn btn-lg bg-green text-light" name="submit">Update</button>
+              <a href="index.php" class="btn bg-red btn-lg text-light">Cancel</a>
             </div>
             </div>
           </form>
