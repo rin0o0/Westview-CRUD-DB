@@ -15,16 +15,36 @@ if (isset($_POST["submit"])) {
    $nationality = $_POST['nationality'];
    $program = $_POST['program'];
    $section = $_POST['section'];
+   $house_no = $_POST['house_no'];
+   $street = $_POST['street']; 
+   $sudb = $_POST['sudb'];
+   $barangay = $_POST['barangay'];
+   $city = $_POST['city'];
+   $province = $_POST['province'];
+   $country = $_POST['country'];
+   $zip_code = $_POST['zip_code'];
 
-   $sql = "INSERT INTO `StudentInfo`(`id`, `first_name`, `middle_name`,`last_name`, `lrn`, `email`, `gender`,`mobile_no`,`placeOf_birth`,`dateOf_birth`,`civil_status`,`nationality`,`program`,`section` ) VALUES (NULL,'$first_name','$middle_name','$last_name','$lrn','$email','$gender','$mobile_no ','$placeOf_birth ','$dateOf_birth ','$civil_status ','$nationality','$program','$section')";
-   
+
+   $sql = "INSERT INTO `StudentInfo`(`id`,`first_name`, `middle_name`,`last_name`, `lrn`, `email`, `gender`,`mobile_no`,`placeOf_birth`,`dateOf_birth`,`civil_status`,`nationality`,`program`,`section` ) VALUES (NULL,'$first_name','$middle_name','$last_name','$lrn','$email','$gender','$mobile_no ','$placeOf_birth ','$dateOf_birth ','$civil_status ','$nationality','$program','$section')";
    $result = mysqli_query($conn, $sql);
 
    if ($result) {
-      header("Location: index.php?msg=Successfully created new student record");
+         $student_id = mysqli_insert_id($conn);
+         $sql2 = "INSERT INTO `addresstbl`(`id`,`house_no`,`street`, `sudb`, `barangay`, `city`,`province`,`country`,`zip_code`,`student_id`) VALUES (NULL,'$house_no','$street','$sudb','$barangay','$city','$province','$country ','$zip_code','$student_id')";
+         
+         $result2 = mysqli_query($conn, $sql2);
+         
+         if ($result2) {
+            header("Location: index.php?msg= Successfully added student record: " . $student_id);
+         } if (!$result2){
+            header("Failed to insert address: " . mysqli_error($conn));
+            
+         }
+         
    } else {
       echo "Failed: " . mysqli_error($conn);
    }
+
 }
 
 ?>
@@ -98,9 +118,10 @@ if (isset($_POST["submit"])) {
                <div class="valid-feedback">Valid</div>
                </div>
 
+               <!-- LRN -->
                <div class="mb-3 col-md-5">
                   <label>LRN</label>
-                  <input type="tel" class="form-control" pattern=".{12}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
+                  <input type="tel" class="form-control" pattern=".{1}" placeholder="Enter 12 Digit LRN Number" id="lrn" name="lrn" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                </div>
 
@@ -154,7 +175,7 @@ if (isset($_POST["submit"])) {
                <!-- Mobile Number -->
                <div class="mb-3 col-md-6">
                   <label>Mobile Number</label>
-                  <input type="tel" class="form-control" pattern=".{11}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" autocomplete="off" required>
+                  <input type="tel" class="form-control" pattern=".{1}" placeholder="Enter 11 Digit Mobile Number" id="mobile_no" name="mobile_no" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                </div>
 
