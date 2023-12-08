@@ -132,7 +132,7 @@ if (isset($_POST["submit"])) {
                 <!-- Zip Code -->
                 <div class="mb-3 col-md-4">
                     <label>Zip Code</label>
-                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off">
+                    <input type="tel" pattern=".{4}" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off">
                     <div class="valid-feedback">Valid</div>
                 </div>
             </div>

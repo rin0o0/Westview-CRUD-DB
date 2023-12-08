@@ -118,7 +118,7 @@ $id = $_GET["id"];
                 <!-- Zip Code -->
                 <div class="mb-3 col-md-4">
                     <label>Zip Code</label>
-                    <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off" disabled>
+                    <input type="tel" pattern=".{4}" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" value="<?php echo $row['zip_code'] ?>" autocomplete="off" disabled>
                     <div class="valid-feedback">Valid</div>
                 </div>
             </div>
