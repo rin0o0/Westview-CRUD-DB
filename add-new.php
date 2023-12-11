@@ -135,7 +135,7 @@ if (isset($_POST["submit"])) {
                <div class="form-group mb-3 col-md-3">
                   <label>Gender:</label>
                   &nbsp;
-                  <div class="pt-2">
+                  <div class="pt-2" required>
                      <input type="radio" class="form-check-input" name="gender" id="male" value="Male">
                      <label for="male" class="form-input-label">Male</label>
                      &nbsp;
@@ -268,7 +268,7 @@ if (isset($_POST["submit"])) {
                <!-- Zip Code -->
                <div class="mb-3 col-md-4">
                   <label>Zip Code</label>
-                  <input type="text" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" autocomplete="off" required>
+                  <input type="tel" pattern=".{4}" class="form-control" placeholder="Enter Zip Code" id="zip_code" name="zip_code" autocomplete="off" required>
                   <div class="valid-feedback">Valid</div>
                </div>
 

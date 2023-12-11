@@ -33,6 +33,31 @@ include "db_conn.php";
           <img src="Header1.png" class="img-fluid page-header" width="800px" alt="Responsive image" >
   </header>
 
+  <div class="modal fade" id="deletemodal" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-danger" id="modal-header">
+                  <h1 class="modal-title text-light fs-5">Confirm Delete</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <form action="delete.php" method="POST">
+
+                  <div class="modal-body">
+                      <input type="hidden" name="delete_id" id="delete_id">
+                      Are you sure you want to delete this record?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="deletedata" class="btn btn-outline-danger">Delete</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+
 
   <div class="container-fluid py-5 px-5 tbl-container">
     <?php
@@ -67,27 +92,6 @@ include "db_conn.php";
         </tr>
       </thead>
       <tbody>
-        <tr>
-            <td>0</td>
-            <td>Christina Gabrielle</td>
-            <td>Legaspi</td>
-            <td>Tecson</td>
-            <td>123456789101</td>
-            <td>tecson.chr@sdca.edu.ph</td>
-            <td>Female</td>
-            <td>09943123456</td>
-            <td>Mandaluyong</td>
-            <td>02/13/2003</td>
-            <td>Single</td>
-            <td>Filipino</td>
-            <td>BSIT</td>
-            <td>BSIT3A</td>
-            <td>
-              <a href="edit.php?id=<?php echo $row["id"] ?>" style="color: rgb(4,35,60);"><i class="fa-solid fa-pencil fs-5 me-3"></i></a>
-              <a data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a>
-              <a href="address.php" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
-            </td>
-          </tr>
         <?php
         $sql = "SELECT * FROM `StudentInfo`";
         $result = mysqli_query($conn, $sql);
@@ -111,43 +115,47 @@ include "db_conn.php";
             
             <td>
               <a href="edit.php?id=<?php echo $row["id"] ?>"  style="color: rgb(4,35,60);"><i class="fa-solid fa-pencil fs-5 me-3"></i></a>
-              <a data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a>
-              <a href="address.php?id=<?php echo $row["id"] ?>"" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
-            </td>
-          </tr>
+              <!-- <a a href="delete.php?id= ?php echo $row["id"] ?>"  style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></a> -->
 
-        <!------------------------ DELETE MODAL ------------------------>
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="delete-label" aria-hidden="true">
-            <div class="modal-dialog modal-md ">
-                <div class="modal-content">
-                  <div class="modal-header bg-danger" id="modal-header">
-                      <h1 class="modal-title text-light fs-5">Confirm Delete</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <!-- Modal Body -->
-                  <div class="modal-body">
-                      <div id="delete-prompt">Are you sure you want to delete this record?</div>
-                  </div>
-                  <!-- Modal Footer -->
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cancel</button>
-                      <a href="delete.php?id=<?php echo $row["id"] ?>" class="btn btn-outline-danger">Delete</a>
-                  </div>
-                </div>
-            </div>
-        </div>
+              <button class="deletebtn bg-transparent border-0" style="color: rgb(4,35,60);"><i class="fa-solid fa-trash fs-5 me-3"></i></button>
+              <a href="address.php?id=<?php echo $row["id"] ?>" style="color: rgb(4,35,60);"><i class="fa-solid fa-house fs-5"></i></a>
+          </td>
+        </tr>
         <?php
         }
         ?>
       </tbody>
     </table>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <script>
+        $(document).ready(function () {
+
+            $('.deletebtn').on('click', function () {
+
+                $('#deletemodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#delete_id').val(data[0]);
+
+            });
+        });
+    </script>
     
 
   <!-- Bootstrap -->
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  <script></script>
 </body>
 
 </html>
